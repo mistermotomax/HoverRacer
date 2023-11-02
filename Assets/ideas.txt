@@ -1,0 +1,7 @@
+- Raumschiff hängt als Hinge Joint an dem Follower, Schiff kann bei zuviel G abreissen
+- Gegner kommen aus Löchern/Türen in dem Wurm
+- Beschleunigungspfeile machen kurz schneller und unverwundbar (Glow), damit kann man die Gegner tot dashen
+- man wiederholt die Runde, bis alle Gegner weg sind
+- Crosshairs
+- Schiff dreht sich von alleine leicht mit der Wurm-Drehung, Crosshairs entspr. mit (?)
+- Cam lerpt hinterher
