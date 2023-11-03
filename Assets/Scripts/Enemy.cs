@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
         playerFollower = player.GetComponent<Player>().follower.GetComponent<SplineFollower>();
     }
 
-    public void OnHit()
+    public void OnHit(Transform other)
     {
         Transform explosion = poolExplosion.GetPooledObject().transform;
         explosion.transform.position = this.transform.position;

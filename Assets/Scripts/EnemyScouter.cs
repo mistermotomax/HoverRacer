@@ -8,6 +8,8 @@ using Dreamteck.Splines;
 public class EnemyScouter : MonoBehaviour
 {
     Enemy enemy;
+    public ObjectPool bulletPool;
+    public Transform cannon;
 
     void Awake()
     {
@@ -28,6 +30,22 @@ public class EnemyScouter : MonoBehaviour
             new Vector3(0, 0, Random.Range(45, 180)/*  * Random.Range(0, 2) == 0 ? -1 : 1 */), 50f, RotateMode.FastBeyond360)
             .SetLoops(-2, LoopType.Yoyo).SetSpeedBased().SetEase(Ease.InOutSine);
         enemy.splineFollower.followSpeed = enemy.playerFollower.followSpeed;
+        StartCoroutine(Shoot());
+    }
+
+    IEnumerator Shoot()
+    {
+        while (this.gameObject.activeSelf)
+        {
+            yield return new WaitForSeconds(1f);
+            Transform newBullet = bulletPool.GetPooledObject().transform;
+            newBullet.gameObject.SetActive(true);
+            newBullet.position = cannon.position;
+            newBullet.LookAt(enemy.player.GetComponent<Player>().ship);
+            Vector3 direction = this.transform.position - enemy.player.GetComponent<Player>().ship.position - new Vector3(0, 1.5f, 0);
+            Debug.DrawRay(cannon.position, cannon.forward * 10f, Color.red, 1f);
+            newBullet.GetComponent<Bullet>().direction = cannon.forward;
+        }
     }
 
     /*     IEnumerator CheckDistanceToPlayer()
@@ -42,6 +60,6 @@ public class EnemyScouter : MonoBehaviour
 
     public void OnPlayerTriggered()
     {
-        StartShip();
+        Invoke("StartShip", Random.Range(0, 0.5f));
     }
 }

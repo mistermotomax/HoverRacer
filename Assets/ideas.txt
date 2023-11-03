@@ -5,3 +5,12 @@
 - Crosshairs
 - Schiff dreht sich von alleine leicht mit der Wurm-Drehung, Crosshairs entspr. mit (?)
 - Cam lerpt hinterher
+
+
+1) Gegner feuern mit rotem Laser auf Player
+2) Player kann Schaden nehmen, HUD leuchtet rot
+3) ab und zu auf der Röhre Gitter so ähnlich wie das "Haus" am Anfang, wo man durchschlüpfen muss
+4) HUD-Pfeile, die auf die Gegner zeigen
+5) Score und Tempo-Anzeigen mit Funktion
+6) evtl. stecken die Gegner mehrere Treffer weg und haben Energiebalken
+- leichtes Auto Aim hoch und langsam wieder runter

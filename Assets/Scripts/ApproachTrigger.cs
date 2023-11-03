@@ -7,7 +7,7 @@ public class ApproachTrigger : MonoBehaviour
     public Transform parentScript;
     void OnTriggerEnter(Collider col)
     {
-        if (col.GetComponent<Player>() != null)
+        if (col.tag == "Player")
         {
             parentScript.SendMessage("OnPlayerTriggered");
         }

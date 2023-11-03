@@ -6,15 +6,21 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 1f;
     public float killTime = 2f;
+    public string targetTag = "Enemy";
+    public Vector3 direction = Vector3.up;
+    public bool hideOnHit = true;
     void OnEnable()
     {
-        Invoke("Deactivate", killTime);
+        if (killTime > 0)
+        {
+            Invoke("Deactivate", killTime);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.Translate(Vector3.up * speed);
+        this.transform.Translate(direction * speed);
     }
 
     void Deactivate()
@@ -24,10 +30,14 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        print("bullet ouch");
-        if (col.GetComponent<Enemy>() != null)
+        //print("bullet ouch " + col.name);
+        if (col.tag == targetTag)
         {
-            col.GetComponent<Enemy>().OnHit();
+            //print("bullet ouch 2");
+            col.SendMessage("OnHit", this.transform);
+
+            if (hideOnHit)
+                Deactivate();
         }
     }
 }
