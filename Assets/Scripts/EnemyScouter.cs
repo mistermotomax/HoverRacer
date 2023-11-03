@@ -10,6 +10,7 @@ public class EnemyScouter : MonoBehaviour
     Enemy enemy;
     public ObjectPool bulletPool;
     public Transform cannon;
+    public bool idle = true;
 
     void Awake()
     {
@@ -25,11 +26,13 @@ public class EnemyScouter : MonoBehaviour
 
     void StartShip()
     {
+        idle = false;
         this.transform.DOLocalMoveY(3, 1f);
         enemy.orbitRoot.DOLocalRotate(
             new Vector3(0, 0, Random.Range(45, 180)/*  * Random.Range(0, 2) == 0 ? -1 : 1 */), 50f, RotateMode.FastBeyond360)
             .SetLoops(-2, LoopType.Yoyo).SetSpeedBased().SetEase(Ease.InOutSine);
         enemy.splineFollower.followSpeed = enemy.playerFollower.followSpeed;
+        //enemy.splineFollower.direction = Spline.Direction.Backward;
         StartCoroutine(Shoot());
     }
 
@@ -37,7 +40,7 @@ public class EnemyScouter : MonoBehaviour
     {
         while (this.gameObject.activeSelf)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.3f);
             Transform newBullet = bulletPool.GetPooledObject().transform;
             newBullet.gameObject.SetActive(true);
             newBullet.position = cannon.position;
@@ -60,6 +63,9 @@ public class EnemyScouter : MonoBehaviour
 
     public void OnPlayerTriggered()
     {
-        Invoke("StartShip", Random.Range(0, 0.5f));
+        if (idle)
+        {
+            Invoke("StartShip", Random.Range(0, 0.5f));
+        }
     }
 }

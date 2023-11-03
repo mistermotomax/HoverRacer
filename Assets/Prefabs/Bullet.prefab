@@ -227,8 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6e3d1057939a545b40babeebbcf234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 1
   killTime: 2
+  targetTag: Enemy
+  direction: {x: 0, y: 1, z: 0}
+  hideOnHit: 1
 --- !u!54 &5635121753712232529
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10,9 +10,18 @@ public class LevelManager : MonoBehaviour
     public int nrTurrets = 30;
     public int nrRings = 20;
     public ObjectPool poolFalcons;
+    public List<SplineFollower> Falcons = new List<SplineFollower>();
+    public SplineFollower PlayerFollower;
+    public UiFollowObject hudFalconPrefab;
+    public Canvas hudCanvas;
     void Start()
     {
         PlaceAllEnemies();
+
+    }
+
+    void Update()
+    {
 
     }
 
@@ -34,7 +43,16 @@ public class LevelManager : MonoBehaviour
                 Random.Range(-90f, 90f)
             );
             newTurret.name = "Falcon " + i;
+            Falcons.Add(newTurret);
+
+            UiFollowObject newHud = Instantiate(hudFalconPrefab, hudCanvas.transform);
+            newHud.target = newTurret.transform.GetChild(0).GetChild(0);
+            newTurret.GetComponentInChildren<Enemy>().hudFollowMe = newHud.GetComponent<RectTransform>();
+
         }
+        enemyPrefab.gameObject.SetActive(false);
+
+
 
         for (int i = 0; i < nrRings; i++)
         {
