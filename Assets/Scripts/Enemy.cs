@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public SplineFollower splineFollower;
     public ObjectPool poolExplosion;
     public RectTransform hudFollowMe;
+    public ScoreUi scoreUi;
     void Start()
     {
         playerFollower = player.GetComponent<Player>().follower.GetComponent<SplineFollower>();
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
         explosion.transform.position = this.transform.position;
         explosion.gameObject.SetActive(true);
         explosion.GetComponent<ParticleSystem>().Play();
+        scoreUi.OnUpdateScore(200);
 
         DeactivateMyself();
 

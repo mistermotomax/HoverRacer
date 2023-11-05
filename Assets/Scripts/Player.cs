@@ -94,6 +94,6 @@ public class Player : MonoBehaviour
 
     public void OnHit()
     {
-        OnDamage(10);
+        OnDamage(3);
     }
 }
